@@ -9,35 +9,43 @@ function gameLoop(state, game, timestamp) {
     let {wizardElement }= game;
     
     modifyWizardPosition(state, game)
-    ////spawn bug enemies
-    
+
+    ////Spawn bug enemies
     if(Number(timestamp) > Number(state.bugStats.lastSpawnTime)) {
         game.createBug(state.bugStats);
         state.bugStats.lastSpawnTime = timestamp + (Math.random() * state.bugStats.maxTimeBetweenSpawns);
     } 
-         
     
-    ///render
     
+    ///Render wizard
     wizardElement.style.left = wizard.posX + "px";
     wizardElement.style.top = wizard.posY + "px";
     window.requestAnimationFrame(gameLoop.bind(null, state, game))
-    //
+    //Render bugs
+    document.querySelectorAll('.bug').forEach(bug => {
+        let posX = parseInt(bug.style.left) - state.bugStats.bugSpeed;
+        if(posX < 0) {
+            bug.remove()
+        }
+        bug.style.left = posX + "px"
+    })
+    
+   
 }
 function modifyWizardPosition(state, game) {
     
     let {wizard} = state
     if(state.keys.KeyD) {
-        wizard.posX = Math.min(wizard.posX + wizard.speed, game.gameScreen.offsetWidth - wizard.width)
+        wizard.posX = Math.min(wizard.posX + wizard.horizontalSpeed, game.gameScreen.offsetWidth - wizard.width)
     }
     if(state.keys.KeyA) {
-        wizard.posX = Math.max(wizard.posX - wizard.speed, 0)
+        wizard.posX = Math.max(wizard.posX - wizard.horizontalSpeed, 0)
     }
     if(state.keys.KeyW) {
-        wizard.posY = Math.max(wizard.posY - wizard.speed, 0)
+        wizard.posY = Math.max(wizard.posY - wizard.verticalSpeed, 0)
     }
     if(state.keys.KeyS) {
-        wizard.posY = Math.min(wizard.posY + wizard.speed, game.gameScreen.offsetHeight - wizard.height)
+        wizard.posY = Math.min(wizard.posY + wizard.verticalSpeed, game.gameScreen.offsetHeight - wizard.height)
     }
 
 }

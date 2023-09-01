@@ -8,13 +8,15 @@ function initState() {
             height: 100,
             posX : startX,
             posY : startY,
-            speed: 15
+            verticalSpeed: 10,
+            horizontalSpeed: 7.5
         },
         bugStats: {
             width: 50,
             height: 50,
             maxTimeBetweenSpawns: 2000,
-            lastSpawnTime: 0
+            lastSpawnTime: 0,
+            bugSpeed: 10
         },
         keys: {
             KeyA: false,

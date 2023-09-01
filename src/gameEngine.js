@@ -1,13 +1,32 @@
 function start(state, game) {
     game.createWizard(state.wizard)
     
-    window.requestAnimationFrame(gameLoop.bind(null, state, game))
+    window.requestAnimationFrame(timestamp => gameLoop(state, game, timestamp))
 }
 
-function gameLoop(state, game) {
-    let {wizard} = state;
+function gameLoop(state, game, timestamp) {
+    let {wizard} = state
     let {wizardElement }= game;
     
+    modifyWizardPosition(state, game)
+    ////spawn bug enemies
+    
+    if(Number(timestamp) > Number(state.bugStats.lastSpawnTime)) {
+        game.createBug(state.bugStats);
+        state.bugStats.lastSpawnTime = timestamp + (Math.random() * state.bugStats.maxTimeBetweenSpawns);
+    } 
+         
+    
+    ///render
+    
+    wizardElement.style.left = wizard.posX + "px";
+    wizardElement.style.top = wizard.posY + "px";
+    window.requestAnimationFrame(gameLoop.bind(null, state, game))
+    //
+}
+function modifyWizardPosition(state, game) {
+    
+    let {wizard} = state
     if(state.keys.KeyD) {
         wizard.posX = Math.min(wizard.posX + wizard.speed, game.gameScreen.offsetWidth - wizard.width)
     }
@@ -21,10 +40,4 @@ function gameLoop(state, game) {
         wizard.posY = Math.min(wizard.posY + wizard.speed, game.gameScreen.offsetHeight - wizard.height)
     }
 
-    ///render
-
-    wizardElement.style.left = wizard.posX + "px";
-    wizardElement.style.top = wizard.posY + "px";
-    //
-    window.requestAnimationFrame(gameLoop.bind(null, state, game))
 }

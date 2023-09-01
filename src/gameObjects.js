@@ -16,6 +16,15 @@ function initGameObject(){
             this.wizardElement = wizardElement
             gameScreen.appendChild(wizardElement)
             return wizardElement;
+        },
+        createBug(initialBugStats){
+            let bugElement = document.createElement("div");
+            bugElement.classList.add("bug");
+            bugElement.style.width = initialBugStats.width + "px";
+            bugElement.style.height = initialBugStats.height + "px";
+            bugElement.style.left = gameScreen.offsetWidth - initialBugStats.width + "px";
+            bugElement.style.top = Math.floor(Math.random() * (gameScreen.offsetHeight - initialBugStats.height)) + "px"
+            gameScreen.appendChild(bugElement)
         }
     }
 }

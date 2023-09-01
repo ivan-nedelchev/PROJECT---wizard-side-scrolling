@@ -10,7 +10,7 @@ function gameLoop(state, game, timestamp) {
     
     modifyWizardPosition(state, game)
 
-    ////fireball
+    ////Spawn fireball
     if(state.keys.Space) {
         game.wizardElement.style.backgroundImage = `url(/images/images/wizard-fire.png)`;
         game.createFireball(wizard)
@@ -38,7 +38,17 @@ function gameLoop(state, game, timestamp) {
         }
         bug.style.left = posX + "px"
     })
-    
+    //Render fireballs
+    document.querySelectorAll('.fireball').forEach(fireball => {
+
+        let posX = parseInt(fireball.style.left) + state.fireball.speed;
+
+        fireball.style.left = posX + "px";
+        // console.log(posX, game.gameScreen.offsetWidth);
+        if(posX > (game.gameScreen.offsetWidth - state.fireball.width)) {
+            fireball.remove()
+        }
+    })
    
 }
 function modifyWizardPosition(state, game) {

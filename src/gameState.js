@@ -20,7 +20,8 @@ function initState() {
         },
         fireball: {
             width: 20,
-            height: 20
+            height: 20,
+            speed: 20
         },
         keys: {
             KeyA: false,

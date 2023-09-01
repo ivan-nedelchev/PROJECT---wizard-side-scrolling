@@ -10,6 +10,15 @@ function gameLoop(state, game, timestamp) {
     
     modifyWizardPosition(state, game)
 
+    ////fireball
+    if(state.keys.Space) {
+        game.wizardElement.style.backgroundImage = `url(/images/images/wizard-fire.png)`;
+        game.createFireball(wizard)
+    } else {
+        game.wizardElement.style.backgroundImage = `url(/images/images/wizard.png)`;
+    }
+
+    
     ////Spawn bug enemies
     if(Number(timestamp) > Number(state.bugStats.lastSpawnTime)) {
         game.createBug(state.bugStats);
@@ -33,7 +42,6 @@ function gameLoop(state, game, timestamp) {
    
 }
 function modifyWizardPosition(state, game) {
-    
     let {wizard} = state
     if(state.keys.KeyD) {
         wizard.posX = Math.min(wizard.posX + wizard.horizontalSpeed, game.gameScreen.offsetWidth - wizard.width)

@@ -18,11 +18,16 @@ function initState() {
             lastSpawnTime: 0,
             bugSpeed: 10
         },
+        fireball: {
+            width: 20,
+            height: 20
+        },
         keys: {
             KeyA: false,
             KeyS: false,
             KeyD: false,
-            KeyW: false
+            KeyW: false,
+            Space: false
         }
     }
     return state;

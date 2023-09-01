@@ -19,8 +19,8 @@ function initState() {
             bugSpeed: 10
         },
         fireball: {
-            width: 20,
-            height: 20,
+            width: 50,
+            height: 50,
             speed: 20
         },
         keys: {

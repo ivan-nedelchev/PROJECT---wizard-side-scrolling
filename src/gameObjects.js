@@ -20,8 +20,8 @@ function initGameObject(){
         createFireball(wizard){
             let fireballElement = document.createElement("div");
             fireballElement.classList.add("fireball")
-            fireballElement.style.left = wizard.posX + wizard.width+ "px"
-            fireballElement.style.top = wizard.posY + wizard.height / 3 + 5 + "px"
+            fireballElement.style.left = wizard.posX + wizard.width - 20+ "px"
+            fireballElement.style.top = wizard.posY + wizard.height / 4 + "px"
             fireballElement.style.width = state.fireball.width + "px";
             fireballElement.style.height = state.fireball.height + "px";
             gameScreen.appendChild(fireballElement)

@@ -12,10 +12,7 @@ document.addEventListener("keyup", (e) => {
     }
 })
 game.startScreen.addEventListener("click", () => {
-
     game.startScreen.classList.add("hidden");
     game.gameScreen.classList.remove("hidden");
-
-
     start(state, game);
 })
